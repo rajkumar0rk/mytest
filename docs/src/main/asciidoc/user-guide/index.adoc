@@ -1,0 +1,76 @@
+
+[id='mapping-data']
+= AtlasMap User Guide
+The AtlasMap Team
+:revnumber: {version}
+:revdate: {localdate}
+:toc: macro
+:toclevels: 3
+:toc-title: AtlasMap User Guide
+:doctype: book
+:icons: font
+
+// ifndef::ebook-format[:leveloffset: 1]
+
+ifdef::basebackend-html[toc::[]]
+
+:numbered:
+include::topics/_badges.adoc[]
+
+
+[[introduction]]
+
+AtlasMap is a data mapping solution with an interactive web based user interface.
+It simplifies configuration of an integration that handles different
+types of data including: 
+
+* XML schema or instance files
+* JSON schema or instance files
+* Java class files
+
+To use AtlasMap, you start from AtlasMap UI and import your data shape definition files,
+ map source fields to target fields, optionally apply transformations or conditions,
+and then execute defined mappings by means of the AtlasMap runtime engine.
+AtlasMap provides standard transformations and 
+supports the creation of custom, user-defined transformations.  
+
+AtlasMap UI is available:
+
+* As a standalone application
+* Embedded in 
+link:https://syndesis.io/[Syndesis], which is an open-source integration platform
+
+To execute the mappings created through AtlasMap UI,
+there is a `camel-atlasmap` component that consumes an
+AtlasMap mapping definition and processes data mappings as a part of a Camel route
+https://camel.apache.org/components/latest/atlasmap-component.html
+
+Also, There is a Camel Quarkus extension for AtlasMap
+https://camel.apache.org/camel-quarkus/latest/reference/extensions/atlasmap.html
+
+This user guide is organized as follows: 
+
+* <<quickstart>>
+* <<overview-of-atlasmap>>
+* <<importing-data-files-into-atlasmap>>
+* <<mapping-fields-in-atlasmap>>
+* <<exporting-mappings-to-an-atlasmap-catalog-file>>
+* <<resetting-data-files-in-atlasmap>>
+* <<running-atlasmap-with-apache-camel>>
+* <<atlasmap-runtime-examples>>
+
+include::topics/quickstart.adoc[leveloffset=+1]
+
+include::topics/overview-of-atlasmap.adoc[leveloffset=+1]
+
+include::topics/importing-data-files-into-atlasmap.adoc[leveloffset=+1]
+
+include::topics/mapping-fields-in-atlasmap.adoc[leveloffset=+1]
+
+include::topics/exporting-mappings-to-an-atlasmap-catalog-file.adoc[leveloffset=+1]
+
+include::topics/resetting-data-files-in-atlasmap.adoc[leveloffset=+1]
+
+include::topics/running-atlasmap-with-apache-camel.adoc[leveloffset=+1]
+
+include::../../../../../examples/index.adoc[leveloffset=+1]

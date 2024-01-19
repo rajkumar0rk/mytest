@@ -1,0 +1,18 @@
+[id='exporting-mappings-to-an-atlasmap-catalog-file']
+= Exporting mappings to an AtlasMap catalog file
+
+After all mappings are defined, save the mappings by exporting
+them to an AtlasMap `.adm` catalog file:
+
+. Click the *AtlasMap* menu and select *Export the current mappings and support files into a catalog (.adm)*
++
+image:AtlasMapMenu.png[AtlasMap menu].
++
+. In the *Export mappings* field, accept the default name or enter
+a name for the exported `.adm` file. The default name is `atlasmap-mapping.adm`.
+
+. Click *OK*.
++
+The catalog will be saved in your *Downloads* folder.
+
+. Note, you can later import the .adm file by using the *AtlasMap* menu.

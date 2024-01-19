@@ -1,0 +1,15 @@
+name: Cancel Previous
+on:
+  workflow_run:
+    workflows: ["__Experimental", "Main", "Checked", "Node"]
+    types:
+      - requested
+jobs:
+  cancel:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: styfle/cancel-workflow-action@0.9.0
+      with:
+        workflow_id: ${{ github.event.workflow.id }}
+      continue-on-error: true
+

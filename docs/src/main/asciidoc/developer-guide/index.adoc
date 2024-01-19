@@ -1,0 +1,56 @@
+= AtlasMap Developer Guide
+The AtlasMap Team
+:revnumber: {version}
+:revdate: {localdate}
+:toc: macro
+:toclevels: 3
+:toc-title: AtlasMap Developer Guide
+:doctype: book
+:icons: font
+
+ifndef::ebook-format[:leveloffset: 1]
+
+ifdef::basebackend-html[toc::[]]
+
+:numbered:
+include::inc/_badges.adoc[]
+
+
+include::inc/_introduction.adoc[]
+
+<<<
+
+include::inc/_quickstart.adoc[]
+
+<<<
+
+include::inc/_internal_design.adoc[]
+
+<<<
+
+include::inc/_camel.adoc[]
+
+<<<
+
+[[Reference]]
+= Reference
+
+== <<openapi/index#, Design Time Service API>>
+=== <<openapi/core/index#, Core>>
+=== <<openapi/java/index#, Java>>
+=== <<openapi/json/index#, JSON>>
+=== <<openapi/xml/index#, XML>>
+=== <<openapi/dfdl/index#, DFDL>>
+
+include::inc/_fieldAction.adoc[]
+
+== <<javadoc/index#, Java API Reference (Javadoc)>>
+
+== Coverage Reports
+=== <<coverage/java/index#, Java>>
+=== <<coverage/ui/atlasmap/index#, UI/atlasmap>>
+=== <<coverage/ui/atlasmap-core/index#, UI/atlasmap-core>>
+=== <<coverage/ui/atlasmap-standalone/index#, UI/atlasmap-standalone>>
+
+include::inc/_terminology.adoc[]
+

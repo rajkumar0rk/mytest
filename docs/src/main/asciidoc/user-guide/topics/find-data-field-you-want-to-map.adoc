@@ -1,0 +1,31 @@
+[id='find-the-field-you-want-to-map']
+= Finding the data field that you want to map
+
+In a relatively simple integration, mapping data fields is easy
+and intuitive. In more complex integrations or in integrations that handle
+large sets of data fields, mapping from source to target is easier when
+you have some background about how to use the data mapper.
+
+The data mapper displays two columns of data fields:
+
+* *Source* is a list of the data fields that you can map to target fields.
+* *Target* is a list of the data fields that you can map source fields to.
+
+To quickly find the data field that you
+want to map, you can do any of the following:
+
+* Search for it.
++
+The *Source* panel and the *Target* panel each have
+a search field at the top. Enter the name of the field you want to map.
+
+* Enter the names of the fields that you want to map in the *Mapping Details* panel.
++
+Click image:AddIcon.png[Add icon] in the toolbar to add a new empty mapping. The *Mapping Details* panel will slide in from the
+right. In the *Sources* section, enter
+the name of the source field. In the *Targets* section, enter the name of the
+field that you want to map to.
+
+* Expand and collapse folders to limit the visible fields.
++
+Once the appropriate field is visible, you can drag it to a currently mapped field in the opposite panel to add it to that mapping.

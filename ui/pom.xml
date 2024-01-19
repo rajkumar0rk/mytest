@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2017 JBoss by Red Hat
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.atlasmap</groupId>
+    <artifactId>atlasmapio</artifactId>
+    <version>2.6.0-SNAPSHOT</version>
+    <relativePath>..</relativePath>
+  </parent>
+
+  <artifactId>atlasmap-ui</artifactId>
+  <packaging>pom</packaging>
+  <name>AtlasMap Data Mapper UI</name>
+  <description>AtlasMap Data Mapper UI to design data mapping on an interactive web user interface</description>
+  <url>https://www.atlasmap.io/</url>
+  <scm>
+    <connection>scm:git:https://github.com/atlasmap/atlasmap.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:atlasmap/atlasmap.git</developerConnection>
+    <url>http://github.com/atlasmap/atlasmap</url>
+    <tag>HEAD</tag>
+  </scm>
+  <organization>
+    <name>JBoss by Red Hat</name>
+    <url>http://jboss.org</url>
+  </organization>
+  <issueManagement>
+    <system>github</system>
+    <url>https://github.com/atlasmap/atlasmap/issues</url>
+  </issueManagement>
+  <developers>
+    <developer>
+      <name>Atlasmap committers</name>
+    </developer>
+  </developers>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <properties>
+    <checkstyle.skip>true</checkstyle.skip>
+  </properties>
+
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <descriptors>
+                <descriptor>maven-assembly.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+          <execution>
+            <id>make-assembly-mock-embedded</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <descriptors>
+                <descriptor>maven-assembly-mock-embedded.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+          <executions>
+            <execution>
+              <id>install yarn</id>
+              <phase>compile</phase>
+              <goals>
+                <goal>install-node-and-yarn</goal>
+              </goals>
+              <configuration>
+                <nodeVersion>${node.version}</nodeVersion>
+                <npmVersion>${npm.version}</npmVersion>
+                <yarnVersion>${yarn.version}</yarnVersion>
+              </configuration>
+            </execution>
+            <execution>
+              <id>yarn install</id>
+              <phase>compile</phase>
+              <goals>
+                <goal>yarn</goal>
+              </goals>
+              <configuration>
+                <arguments>install -s --no-progress --network-timeout 1000000</arguments>
+              </configuration>
+            </execution>
+            <execution>
+              <id>yarn build:module</id>
+              <phase>compile</phase>
+              <goals>
+                <goal>yarn</goal>
+              </goals>
+              <configuration>
+                <arguments>build:module</arguments>
+              </configuration>
+            </execution>
+             <execution>
+              <id>yarn build:storybook</id>
+              <phase>compile</phase>
+              <goals>
+                <goal>yarn</goal>
+              </goals>
+              <configuration>
+                <arguments>build:storybook</arguments>
+              </configuration>
+            </execution>
+            <execution>
+              <id>yarn lint</id>
+              <phase>test</phase>
+              <goals>
+                <goal>yarn</goal>
+              </goals>
+              <configuration>
+                <arguments>lint</arguments>
+              </configuration>
+            </execution>
+            <execution>
+              <id>yarn test</id>
+              <phase>test</phase>
+              <goals>
+                <goal>yarn</goal>
+              </goals>
+              <configuration>
+                <arguments>test</arguments>
+              </configuration>
+            </execution>
+          </executions>
+      </plugin>
+      <plugin>
+        <groupId>io.atlasmap</groupId>
+        <artifactId>atlasmap-maven-plugin</artifactId>
+        <version>${project.version}</version>
+        <executions>
+          <execution>
+            <id>generate-inspections</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>generate-inspections</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>generate-field-actions</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>generate-field-actions</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <outputDir>${project.basedir}/test-resources/inspected</outputDir>
+          <fieldActionOutputDir>${project.basedir}/test-resources/fieldActions</fieldActionOutputDir>
+          <inspections>
+            <inspection>
+              <artifacts>
+                <artifact>org.apache.camel:camel-twitter:2.20.1</artifact>
+              </artifacts>
+              <className>twitter4j.Status</className>
+            </inspection>
+            <inspection>
+              <artifacts>
+		      <artifact>io.atlasmap:atlas-java-test-model:${project.version}</artifact>
+              </artifacts>
+              <className>io.atlasmap.java.test.TargetTestClass</className>
+            </inspection>
+            <inspection>
+                <fileName>${project.basedir}/test-resources/json/schema</fileName>
+                <inspectionType>SCHEMA</inspectionType>
+            </inspection>
+            <inspection>
+                <fileName>${project.basedir}/test-resources/json/instance</fileName>
+                <inspectionType>INSTANCE</inspectionType>
+            </inspection>
+            <inspection>
+                <fileName>${project.basedir}/test-resources/xml/schema</fileName>
+                <inspectionType>SCHEMA</inspectionType>
+            </inspection>
+            <inspection>
+                <fileName>${project.basedir}/test-resources/xml/instance</fileName>
+                <inspectionType>INSTANCE</inspectionType>
+            </inspection>
+          </inspections>
+          <fieldActions>
+            <fieldAction>
+              <artifacts>
+                <artifact>io.atlasmap:atlasmap-maven-plugin:jar:tests:${project.version}</artifact>
+              </artifacts>
+            </fieldAction>
+          </fieldActions>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-twitter</artifactId>
+            <version>2.25.4</version>
+          </dependency>
+          <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.1.1</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <configuration>
+              <skip>true</skip>
+            </configuration>
+          </plugin>
+          <plugin>
+            <artifactId>maven-source-plugin</artifactId>
+            <configuration>
+              <skip>true</skip>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>coverage</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.github.eirslett</groupId>
+            <artifactId>frontend-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>yarn test</id>
+                <phase>test</phase>
+                <goals>
+                  <goal>yarn</goal>
+                </goals>
+                <configuration>
+                  <arguments>test:coverage</arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

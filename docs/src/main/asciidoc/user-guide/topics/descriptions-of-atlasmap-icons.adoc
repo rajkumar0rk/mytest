@@ -1,0 +1,26 @@
+[id='descriptions-of-atlasmap-icons']
+= Descriptions of AtlasMap icons
+
+The following table describes some of the AtlasMap icons:
+
+[cols=2*,options="header"]
+|===
+|Icon
+|Description
+
+|image:CircleIcon.png[Circle icon]
+|Completely mapped field
+
+|image:CollectionIcon.png[Collection icon]
+|Collection field
+
+|image:FolderIcon.png[Folder icon]
+|Complex type that you can expand
+
+|image:LightningBoltIcon.png[Lightning bolt iicon]
+|There is a transformation that is being applied to this field.
+
+|===
+
+There are also several toolbar buttons that allow you to choose what should be displayed, such as data types, sample data previews,
+and mapped or unmapped fields.

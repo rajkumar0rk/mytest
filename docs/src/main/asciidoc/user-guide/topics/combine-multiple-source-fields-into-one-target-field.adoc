@@ -1,0 +1,68 @@
+[id='combine-multiple-source-fields-into-one-target-field']
+= Combining multiple source fields into one target field
+
+In a data mapping, you can combine multiple source fields into one
+compound target field. For example, you can map the `FirstName` and `LastName`
+fields to the `CustomerName` field.
+
+.Prerequisite
+For the target field, you must know what type of content is in each
+part of this compound field, the order and index of each part of the content,
+and the separator between parts, such as a space or comma. See
+<<example-missing-unwanted-data>>.
+
+.Procedure
+
+. In the *Source* panel, navigate to the first field that
+you want to combine into the target field and click image:CreateNewMapping.png[Create new mapping]. For each of the other
+fields that you want to combine into the target field, click image:ConnectToSelectedMapping.png[Connect to selected mapping] next
+to each field.
++
+The data mapper automatically changes the type of mapping to *Concatenate*.
+
+. In the *Target* panel, click image:ConnectToSelectedMapping.png[Connect to selected mapping] next to the field into which you want
+to map all of the source fields.
++
+When you are done you should see a line from each of the source fields to
+the target field.
+
+. In the *Mapping Details* panel, in the *Delimiter* field, select the
+character that the data mapper inserts in the target field between the content
+from different source fields. The default is a space.
+
+. In the *Mapping Details* panel, under *Sources*, ensure that the source
+fields are in the order in which they are expected to appear in the target field.
++
+If necessary, increase or decrease the index number of a source field to achieve the desired order.
+
+. Optionally, preview the data mapping result:
+.. In the toolbar, click
+image:ShowMappingPreview.png[Show mapping preview] and select
+*Show Mapping Preview* to display a text input field on each source
+field for the currently selected mapping and a read-only result field
+on the target field of the currently selected mapping.
+.. In the source data input fields, enter text. Click outside the
+text box to display the mapping result in the read-only field on the target field.
++
+If you reorder the source fields or add a transformation to the mapping
+then the result field on the target field reflects this. If the data mapper
+detects any errors, it displays informative messages at the top of the
+*Mapping Details* panel.
+
+.. Hide the preview fields by clicking
+image:ShowMappingPreview.png[Show mapping preview] again.
++
+If you redisplay the preview fields, any data
+that you entered in them is still there and it
+remains there until you exit the data mapper.
+
+. To confirm that the mapping is correctly defined, in the upper right, click
+image:GridIcon.png[Grid icon] to display the defined mappings.
+A mapping that combines the values of more than one source field
+into one target field looks like this:
+image:CombineMapping.png[Combine mapping].
++
+You can also preview mapping results in this view. Click
+image:ShowMappingPreview.png[Show mapping preview] and enter text as described in the previous step.
+Preview fields appear for only the selected mapping. Click another
+mapping in the table to view preview fields for it.

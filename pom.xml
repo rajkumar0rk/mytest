@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2017 Red Hat, Inc.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.atlasmap</groupId>
+  <artifactId>atlasmapio</artifactId>
+  <version>2.6.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>AtlasMap Project</name>
+  <description>AtlasMap Project</description>
+  <url>https://atlasmap.io/</url>
+  <scm>
+    <connection>scm:git:https://github.com/atlasmap/atlasmap.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/atlasmap/atlasmap.git</developerConnection>
+    <url>http://github.com/atlasmap/atlasmap</url>
+    <tag>HEAD</tag>
+  </scm>
+  <inceptionYear>2017</inceptionYear>
+  <organization>
+    <name>Red Hat, Inc.</name>
+    <url>http://redhat.com</url>
+  </organization>
+  <issueManagement>
+    <system>github</system>
+    <url>https://github.com/atlasmap/atlasmap/issues</url>
+  </issueManagement>
+  <developers>
+    <developer>
+      <name>AtlasMap committers</name>
+    </developer>
+  </developers>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <name>ossrh</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <name>ossrh</name>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <frontend-maven-plugin.version>1.12.1</frontend-maven-plugin.version>
+    <license-maven-plugin.version>4.1</license-maven-plugin.version>
+    <maven-assembly-plugin.version>3.4.2</maven-assembly-plugin.version>
+    <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
+    <maven-deploy-plugin.version>3.1.0</maven-deploy-plugin.version>
+    <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+    <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+    <!-- DO NOT CHANGE - 3.1.0 changed aggregate behavior drastically, no idea how to generate single aggregated one -->
+    <maven-javadoc-plugin.version>3.4.1</maven-javadoc-plugin.version>
+    <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+    <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+    <nexus-staging-maven-plugin.version>1.6.7</nexus-staging-maven-plugin.version>
+    <node.version>v14.20.0</node.version>
+    <npm.version>6.14.17</npm.version>
+    <yarn.version>v1.22.19</yarn.version>
+    <checkstyle.skip>false</checkstyle.skip>
+     <skipTests>true</skipTests>
+  </properties>
+
+  <modules>
+    <module>parent</module>
+    <module>lib</module>
+    <module>atlasmap-maven-plugin</module>
+    <module>camel</module>
+    <module>kafka-smt</module>
+    <module>ui</module>
+    <module>standalone</module>
+    <module>mock-embedded</module>
+    <module>coverage-report</module>
+    <module>examples</module>
+    <module>docs</module>
+  </modules>
+
+  <repositories>
+    <repository>
+      <id>jboss-fuse</id>
+      <name>jboss-fuse</name>
+      <url>https://repository.jboss.org/nexus/content/groups/ea</url>
+    </repository>
+  </repositories>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>com.github.eirslett</groupId>
+          <artifactId>frontend-maven-plugin</artifactId>
+          <version>${frontend-maven-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>com.mycila</groupId>
+          <artifactId>license-maven-plugin</artifactId>
+          <version>${license-maven-plugin.version}</version>
+          <configuration>
+            <licenseSets>
+              <licenseSet>
+                <!-- <header>${maven.multiModuleProjectDirectory}/atlasmap-license-header.txt</header> -->
+                <header>${user.dir}/atlasmap-license-header.txt</header>
+                <excludes>
+                  <exclude>**/node_modules/**</exclude>
+                  <exclude>.editorconfig</exclude>
+                  <exclude>atlasmap-license-header.txt</exclude>
+                  <exclude>.mention-bot</exclude>
+                  <exclude>.mvn/wrapper/maven-wrapper.properties</exclude>
+                  <exclude>mvnw*</exclude>
+                  <exclude>**/resources/**/test-*</exclude>
+                  <exclude>**/*.mustache</exclude>
+                  <exclude>**/test/resources/**</exclude>
+                  <exclude>**/spring.factories</exclude>
+                  <exclude>**/*.adoc</exclude>
+                  <exclude>**/*.ts</exclude>
+                  <exclude>**/*.tsx</exclude>
+                  <exclude>**/*.css</exclude>
+                  <exclude>**/*.scss</exclude>
+                  <exclude>**/setupProxy.js</exclude>
+                  <exclude>ui/packages/**</exclude>
+                  <exclude>**/*.html</exclude>
+                  <exclude>**/config.json*</exclude>
+                  <exclude>**/.gitkeep</exclude>
+                  <exclude>**/*.webapp</exclude>
+                  <exclude>**/browserconfig.xml</exclude>
+                  <exclude>**/licenses/**/*</exclude>
+                  <exclude>lib/modules/xml/xsom/**/*</exclude>
+                </excludes>
+              </licenseSet>
+            </licenseSets>
+            <mapping>
+              <java>SLASHSTAR_STYLE</java>
+            </mapping>
+          </configuration>
+          <dependencies>
+          </dependencies>
+        </plugin>
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>${maven-assembly-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>${maven-checkstyle-plugin.version}</version>
+          <configuration>
+            <sourceDirectories>
+              <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
+            </sourceDirectories>
+            <includeTestSourceDirectory>false</includeTestSourceDirectory>
+            <configLocation>checkstyle.xml</configLocation>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${maven-deploy-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>${maven-gpg-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>${maven-jar-plugin.version}</version>
+          <configuration>
+            <archive>
+              <addMavenDescriptor>true</addMavenDescriptor>
+            </archive>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>${maven-javadoc-plugin.version}</version>
+          <configuration>
+          <source>8</source>
+            <failOnError>true</failOnError>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>${maven-release-plugin.version}</version>
+          <configuration>
+            <pushChanges>false</pushChanges>
+            <localCheckout>true</localCheckout>
+            <arguments>-Pfabric8,release,community-release -DskipTests</arguments>
+            <checkModificationExcludes>
+              <exclude>**/package-lock.json</exclude>
+              <exclude>**/package.json</exclude>
+              <exclude>**/yarn.lock</exclude>
+            </checkModificationExcludes>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>${maven-source-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>nexus-staging-maven-plugin</artifactId>
+          <version>${nexus-staging-maven.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>license</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>format</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>checkstyle</id>
+            <phase>test</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+          <executions>
+            <execution>
+              <id>attach-javadocs</id>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <additionalparam>${javadoc.opts}</additionalparam>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-source-plugin</artifactId>
+          <executions>
+            <execution>
+              <id>attach-sources</id>
+              <goals>
+                <goal>jar-no-fork</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>java8-doclint-disabled</id>
+      <activation>
+        <jdk>[1.8,)</jdk>
+      </activation>
+      <properties>
+        <javadoc.opts>-Xdoclint:none</javadoc.opts>
+      </properties>
+    </profile>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-deploy-plugin</artifactId>
+            <configuration>
+              <skip>false</skip>
+            </configuration>
+          </plugin>
+          <plugin>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>community-release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>oss-sonatype-staging</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <skipStagingRepositoryClose>true</skipStagingRepositoryClose>
+              <autoReleaseAfterClose>false</autoReleaseAfterClose>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>

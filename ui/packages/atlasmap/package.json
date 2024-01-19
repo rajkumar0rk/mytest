@@ -1,0 +1,181 @@
+{
+  "name": "@atlasmap/atlasmap",
+  "description": "AtlasMap UI presentation layer consists of React components",
+  "version": "2.6.0-SNAPSHOT",
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/index.js",
+  "module": "dist/atlasmap.esm.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "tsdx watch",
+    "prebuild": "node ./atlasmap.prebuild.js",
+    "build:tsdx": "tsdx build",
+    "build:module": "npm-run-all prebuild build:tsdx",
+    "build:storybook": "build-storybook --quiet",
+    "build": "npm-run-all build:module lint test",
+    "test": "tsdx test --runInBand",
+    "test:coverage": "tsdx test --coverage --runInBand",
+    "lint": "tsdx lint src test",
+    "format": "yarn lint --fix",
+    "storybook": "start-storybook -p 6006"
+  },
+  "dependencies": {
+    "@atlasmap/core": "^2.6.0-SNAPSHOT"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@storybook/addon-actions": "^6.3.8",
+    "@storybook/addon-docs": "^6.3.8",
+    "@storybook/addon-knobs": "^6.3.0",
+    "@storybook/addon-links": "^6.3.8",
+    "@storybook/addon-viewport": "^6.3.8",
+    "@storybook/addons": "^6.3.8",
+    "@storybook/react": "^6.3.8",
+    "@testing-library/jest-dom": "^5.7.0",
+    "@testing-library/react": "^12.1.5",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/hoist-non-react-statics": "^3.3.1",
+    "@types/jest": "24.9.1",
+    "@typescript-eslint/eslint-plugin": "^4.23.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "autoprefixer": "^10.2.5",
+    "babel-loader": "8.1.0",
+    "css-loader": "^5.2.4",
+    "cssnano": "^5.0.2",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-header": "^3.1.1",
+    "eslint-plugin-mdx": "^2.0.2",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "jest-css-modules-transform": "^4.2.1",
+    "jest-environment-jsdom-sixteen": "^2.0.0",
+    "lodash.clamp": "^4.0.3",
+    "postcss": "^8.2.15",
+    "postcss-loader": "^4.2.0",
+    "postcss-url": "^10.1.3",
+    "react-spring": "^9.1.2",
+    "rollup-plugin-postcss": "^4.0.2",
+    "source-map-loader": "volune/source-map-loader#fixes",
+    "style-loader": "^2.0.0",
+    "tsconfig-paths-webpack-plugin": "^4.0.0",
+    "tsdx": "^0.13.1",
+    "typed-css-modules": "^0.7.0",
+    "typescript": "~3.9.9",
+    "typescript-plugin-css-modules": "^4.1.0"
+  },
+  "peerDependencies": {
+    "@patternfly/react-core": "^4.224.1",
+    "@patternfly/react-icons": "^4.75.1",
+    "@patternfly/react-styles": "^4.74.1",
+    "@patternfly/react-table": "^4.93.1",
+    "@patternfly/react-topology": "^4.71.1",
+    "@types/d3-scale": "^4.0.0",
+    "@types/d3-shape": "^3.0.0",
+    "@types/he": "^1.1.1",
+    "@types/react": "^17.0.5",
+    "@types/react-dom": "^17.0.5",
+    "d3-scale": "^3.3.0",
+    "d3-shape": "^2.1.0",
+    "he": "^1.2.0",
+    "ky": "~0.31.3",
+    "react": "^17.0.2",
+    "react-dnd": "^14.0.2",
+    "react-dnd-html5-backend": "^14.0.0",
+    "react-dnd-touch-backend": "^14.0.0",
+    "react-dom": "^17.0.2",
+    "react-sage": "^0.3.1",
+    "react-spring": "^9.1.2",
+    "react-use-gesture": "^9.1.3",
+    "rxjs": "^6.6.7",
+    "use-debounce": "^7.0.0"
+  },
+  "resolutions": {
+    "jest": "24.9.0",
+    "prettier": "^2.3.1",
+    "webpack": "4.42.0"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "endOfLine": "auto"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/setup.ts"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/__mocks__/fileMock.js"
+    },
+    "testEnvironment": "jest-environment-jsdom-sixteen",
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest",
+      "^.+\\.(css)$": "jest-css-modules-transform",
+      "ky": "jest-esm-transformer"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(ky|@patternfly/react-styles)/)"
+    ]
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "ecmaFeatures": {
+        "modules": true,
+        "jsx": true
+      },
+      "jsx": true,
+      "useJSXTextNode": true,
+      "sourceType": "module"
+    },
+    "extends": [
+      "prettier",
+      "prettier/react",
+      "prettier/@typescript-eslint",
+      "plugin:react/recommended"
+    ],
+    "plugins": [
+      "@typescript-eslint",
+      "header",
+      "import",
+      "react",
+      "react-hooks"
+    ],
+    "ignorePatterns": "**/*.css.d.ts",
+    "rules": {
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "header/header": [
+        2,
+        "../../atlasmap-license-header-ui.js"
+      ],
+      "no-unused-vars": 0,
+      "no-use-before-define": 0,
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "react/jsx-filename-extension": [
+        2,
+        {
+          "extensions": [
+            ".js",
+            ".jsx",
+            ".ts",
+            ".tsx"
+          ]
+        }
+      ],
+      "react/jsx-uses-vars": 2,
+      "react/prop-types": 0,
+      "sort-imports": "error"
+    }
+  }
+}
